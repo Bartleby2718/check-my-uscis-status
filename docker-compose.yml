@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  web:
+    image: python
+    command: bash -c "cd /app && pip install pytz selenium && sleep 5 && python ./casestatus.py && exit 1"
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8001"
+    container_name: python
+    environment:
+      - PYTHONUNBUFFERED=1
+  selenium:
+    image: selenium/standalone-chrome
+    ports:
+      - 4444:4444
